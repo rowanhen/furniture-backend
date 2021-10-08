@@ -12,7 +12,7 @@ const herokuSSLSetting = { rejectUnauthorized: false }
 const sslSetting = process.env.DATABASE_URL ? false : herokuSSLSetting
 
 const pool = new Pool({
-    connectionString: process.env.DATABASE_URL || 'https://chair--app.herokuapp.com/',
+    connectionString: process.env.DATABASE_URL || 'postgres://jdwszuzucsbgfn:ff0b512a01db69cf3606ad06908580caf27e37e3344cd5e560d8d0913d169866@ec2-176-34-116-203.eu-west-1.compute.amazonaws.com:5432/ddrf6vcs54373a',
     ssl: sslSetting
 })
 
