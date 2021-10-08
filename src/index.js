@@ -28,6 +28,7 @@ if (!port) {
 // 4  |helo  | 1    | buttons   | #ffffff
 
 app.post("/submit", async (req, res) => {
+    await pool.connect();
     try {
         for( let row of req.body ){
             const { name, item, chairPart, colour } = row;
@@ -47,6 +48,7 @@ app.post("/submit", async (req, res) => {
 //get all designs
 
 app.get("/designs", async (req, res) => {
+    await pool.connect();
     try {
         const allDesigns = await pool.query("SELECT * FROM newdesigninfo")
         res.json(allDesigns.rows)
@@ -58,6 +60,7 @@ app.get("/designs", async (req, res) => {
 //load a design
 
 app.get("/designs/:id", async (req, res) => {
+    await pool.connect();
     try {
         const { id } = req.params;
         const design = await pool.query("SELECT * FROM productinfo WHERE id = $1", [ id ])
@@ -70,6 +73,7 @@ app.get("/designs/:id", async (req, res) => {
 //update a design 
 
 app.put("/designs/:id", async (req, res) => {
+    await pool.connect();
     try {
         const { id } = req.params;
         const { name, chairUpper, chairLower, buttonsUpper, buttonsLower, frame, backing } = req.body;
@@ -88,6 +92,7 @@ app.put("/designs/:id", async (req, res) => {
 //TODO: make so design is deleted based on name
 
 app.delete("/designs/:name", async (req, res) => {
+    await pool.connect();
     try {
         const { name } = req.params;
         const deleteDesign = await pool.query("DELETE FROM newdesigninfo WHERE name = $1", [ name ]);
@@ -98,6 +103,7 @@ app.delete("/designs/:name", async (req, res) => {
 });
 
 app.get("/", async (req, res) => {
+    await pool.connect();
     try {
         const everything = await pool.query("SELECT * FROM newdesigninfo")
         res.json(everything.rows)
