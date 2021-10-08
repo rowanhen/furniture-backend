@@ -42,7 +42,6 @@ app.post("/submit", async (req, res) => {
         res.status(200).send(`Added ${req.body.length} rows`);
         
     } catch (err) {
-        res.sendStatus(500);
         console.error(err);
     }
 })
