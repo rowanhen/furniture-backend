@@ -9,11 +9,12 @@ const Pool = require("pg").Pool;
 // });
 
 const herokuSSLSetting = { rejectUnauthorized: false }
-const sslSetting = process.env.LOCAL ? false : herokuSSLSetting
-const dbConfig = {
-  connectionString: process.env.DATABASE_URL,
-  ssl: sslSetting,
-};
+const sslSetting = process.env.DATABASE_URL ? false : herokuSSLSetting
+
+const pool = new Pool({
+    connectionString: process.env.DATABASE_URL || 'https://chair--app.herokuapp.com/',
+    ssl: sslSetting
+})
 
 const pool = new Pool(dbConfig);
 
