@@ -15,9 +15,6 @@ const port = process.env.PORT;
 if (!port) {
   throw 'Missing PORT environment variable.  Set it in .env file.';
 }
-
-pool.connect();
-
 //Routes
 
 //create a design
@@ -42,6 +39,7 @@ app.post("/submit", async (req, res) => {
         res.status(200).send(`Added ${req.body.length} rows`);
         
     } catch (err) {
+        res.sendStatus(500);
         console.error(err);
     }
 })
