@@ -11,7 +11,12 @@ dotenv.config();
 app.use(cors());
 app.use(express.json());
 
-const PORT = process.env.PORT ?? 5000;
+const port = process.env.PORT;
+if (!port) {
+  throw 'Missing PORT environment variable.  Set it in .env file.';
+}
+
+pool.connect();
 
 //Routes
 
@@ -95,6 +100,6 @@ app.delete("/designs/:name", async (req, res) => {
     }
 });
 
-app.listen(PORT, () => {
-    console.log(`server has started on port ${PORT}`)
-})
+app.listen(port, () => {
+  console.log(`Server is up and running on port ${port}`);
+});
