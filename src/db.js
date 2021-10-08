@@ -16,6 +16,4 @@ const pool = new Pool({
     ssl: sslSetting
 })
 
-const pool = new Pool(dbConfig);
-
 module.exports = pool;
