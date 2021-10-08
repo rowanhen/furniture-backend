@@ -97,6 +97,16 @@ app.delete("/designs/:name", async (req, res) => {
     }
 });
 
+app.get("/", async (req, res) => {
+    try {
+        const everything = await pool.query("SELECT * FROM newdesigninfo")
+        res.json(everything.rows)
+        console.log("im working on / !")
+    } catch (err) {
+        console.error(err);
+    }
+})
+
 app.listen(port, () => {
   console.log(`Server is up and running on port ${port}`);
 });
