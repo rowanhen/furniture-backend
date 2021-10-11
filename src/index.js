@@ -111,7 +111,3 @@ app.get("/", async (req, res) => {
         console.error(err);
     }
 })
-
-app.listen(port, () => {
-  console.log(`Server is up and running on port ${port}`);
-});
