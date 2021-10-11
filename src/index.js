@@ -11,18 +11,14 @@ dotenv.config();
 app.use(cors());
 app.use(express.json());
 
-const Pool = require("pg").Pool;
-const herokuSSLSetting = { rejectUnauthorized: false }
-const sslSetting = process.env.DATABASE_URL ? false : herokuSSLSetting
-
-const pool = new Pool({
-    connectionString: process.env.DATABASE_URL || 'nothing',
-    ssl: sslSetting
-})
-
 const port = process.env.PORT ?? 5000;
+
 if (!port) {
   throw 'Missing PORT environment variable.  Set it in .env file.';
+}
+
+if (!process.env.DATABASE_URL) {
+    throw "No DATABASE_URL env var!  Have you made a .env file?  And set up dotenv?";
 }
 //Routes
 

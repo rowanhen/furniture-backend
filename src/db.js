@@ -12,7 +12,7 @@ const herokuSSLSetting = { rejectUnauthorized: false }
 const sslSetting = process.env.DATABASE_URL ? false : herokuSSLSetting
 
 const pool = new Pool({
-    connectionString: process.env.DATABASE_URL || 'nothing',
+    connectionString: process.env.DATABASE_URL,
     ssl: sslSetting
 })
 
