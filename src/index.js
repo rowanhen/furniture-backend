@@ -11,7 +11,7 @@ dotenv.config();
 app.use(cors());
 app.use(express.json());
 
-const port = process.env.DATABASE_URL;
+const port = process.env.PORT ?? 5000;
 if (!port) {
   throw 'Missing PORT environment variable.  Set it in .env file.';
 }
