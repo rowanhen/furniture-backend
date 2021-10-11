@@ -13,7 +13,7 @@ const sslSetting = process.env.DATABASE_URL ? false : herokuSSLSetting
 
 const pool = new Pool({
     connectionString: process.env.DATABASE_URL,
-    ssl: sslSetting
+    ssl: !sslSetting
 })
 
 module.exports = pool;
