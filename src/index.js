@@ -11,7 +11,7 @@ dotenv.config();
 app.use(cors());
 app.use(express.json());
 
-const port = process.env.PORT ?? 5000;
+const port = process.env.PORT;
 
 if (!port) {
   throw 'Missing PORT environment variable.  Set it in .env file.';
@@ -111,3 +111,7 @@ app.get("/", async (req, res) => {
         console.error(err);
     }
 })
+
+app.listen(port, () => {
+  console.log(`Server is up and running on port ${port}`);
+});
