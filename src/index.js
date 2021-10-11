@@ -7,8 +7,14 @@ const dotenv = require("dotenv")
 
 dotenv.config();
 
+const corsOptions ={
+    origin:'*', 
+    credentials:true,            //access-control-allow-credentials:true
+    optionSuccessStatus:200,
+ }
+
 //middleware
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json());
 
 const port = process.env.PORT;
@@ -62,31 +68,31 @@ app.get("/designs", async (req, res) => {
 
 //load a design
 
-app.get("/designs/:id", async (req, res) => {
-    try {
-        const { id } = req.params;
-        const design = await pool.query("SELECT * FROM productinfo WHERE id = $1", [ id ])
-        res.json(design.rows[0])
-    } catch (err) {
-        console.error(err);
-    }
-})
+// app.get("/designs/:id", async (req, res) => {
+//     try {
+//         const { id } = req.params;
+//         const design = await pool.query("SELECT * FROM productinfo WHERE id = $1", [ id ])
+//         res.json(design.rows[0])
+//     } catch (err) {
+//         console.error(err);
+//     }
+// })
 
 //update a design 
 
-app.put("/designs/:id", async (req, res) => {
-    try {
-        const { id } = req.params;
-        const { name, chairUpper, chairLower, buttonsUpper, buttonsLower, frame, backing } = req.body;
-        const updateDesign = await pool.query(
-            "UPDATE productinfo SET (name, chairUpper, chairLower, buttonsUpper, buttonsLower, frame, backing) = ($1, $2, $3, $4, $5, $6, $7) where id = $8",
-            [ name, chairUpper, chairLower, buttonsUpper, buttonsLower, frame, backing, id ]
-        );
-        res.json("Design updated!")
-    } catch (err) {
-        console.error(err);
-    }
-})
+// app.put("/designs/:id", async (req, res) => {
+//     try {
+//         const { id } = req.params;
+//         const { name, chairUpper, chairLower, buttonsUpper, buttonsLower, frame, backing } = req.body;
+//         const updateDesign = await pool.query(
+//             "UPDATE productinfo SET (name, chairUpper, chairLower, buttonsUpper, buttonsLower, frame, backing) = ($1, $2, $3, $4, $5, $6, $7) where id = $8",
+//             [ name, chairUpper, chairLower, buttonsUpper, buttonsLower, frame, backing, id ]
+//         );
+//         res.json("Design updated!")
+//     } catch (err) {
+//         console.error(err);
+//     }
+// })
 
 //delete a design
 
